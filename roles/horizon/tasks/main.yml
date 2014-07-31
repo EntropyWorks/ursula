@@ -35,16 +35,14 @@
   notify:
     - restart apache
 
-- template: |
-    src=etc/apache2/sites-available/openstack_dashboard.conf
-    dest=/etc/apache2/sites-available/openstack_dashboard
+- name: add openstack_dashboard to apache2
+  template: src=etc/apache2/sites-available/openstack_dashboard.conf dest=/etc/apache2/sites-available/openstack_dashboard
   when: ansible_distribution_version == "12.04"
   notify:
     - restart apache
 
-- template: |
-    src=etc/apache2/sites-available/openstack_dashboard.conf
-    dest=/etc/apache2/sites-available/openstack_dashboard.conf
+- name: add openstack_dashboard.conf to apache2
+  template: src=etc/apache2/sites-available/openstack_dashboard.conf dest=/etc/apache2/sites-available/openstack_dashboard.conf
   when: ansible_distribution_version != "12.04"
   notify:
     - restart apache
@@ -68,7 +66,7 @@
     group=www-data
     mode=0755
 
-- template: |
+- template: > 
     src=opt/stack/horizon/openstack_dashboard/local/local_settings.py
     dest=/opt/stack/horizon/openstack_dashboard/local/local_settings.py
     mode=0644
