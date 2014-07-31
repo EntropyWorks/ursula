@@ -43,6 +43,14 @@
     owner=root group=root mode=0644
   register: cluster_configuration
 
+- name: create /etc/rabbitmq/rabbitmq.conf.d directory
+  file: > 
+    dest=/etc/rabbitmq/rabbitmq.conf.d
+    mode=755 
+    owner=root 
+    group=root 
+    state=directory
+
 - name: add rabbitmq cluster configuration
   template: >
     src=etc/rabbitmq/rabbitmq.config dest=/etc/rabbitmq/rabbitmq.config

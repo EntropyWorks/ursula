@@ -34,7 +34,7 @@ endpoints:
 
 rabbitmq:
   user: openstack
-  cluster: false
+  cluster: true
 
 etc_hosts:
   - name: "{{ fqdn }}"

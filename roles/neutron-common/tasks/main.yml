@@ -52,14 +52,14 @@
   notify:
      - restart neutron services
 
-- template: |
+- template: >
     src=etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini
     dest=/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini
     mode=0644
   notify:
     - restart neutron services
 
-- template: |
+- template: >
     src=etc/neutron/services/loadbalancer/haproxy/lbaas_agent.ini
     dest=/etc/neutron/services/loadbalancer/haproxy/lbaas_agent.ini
     mode=0644
