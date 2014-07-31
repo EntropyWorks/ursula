@@ -31,5 +31,5 @@ for I in ${BOXES}; do
 done
 
 export ANSIBLE_SSH_ARGS="${ANSIBLE_SSH_ARGS} -F ${TEMPFILE}"
-./bin/ursula envs/vagrant/${TYPE} site.yml -s -u vagrant
+./bin/ursula envs/vagrant/${TYPE} site.yml -s -u vagrant 
 rm ${TEMPFILE}

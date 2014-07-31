@@ -8,17 +8,10 @@
   apt: pkg=rabbitmq-server
   when: not rabbitmq.cluster
 
-- name: remove default rabbit user
-  rabbitmq_user: user=guest
-                 {% if rabbitmq.cluster -%}
-                 node={{ rabbitmq.nodename }}
-                 {% endif -%}
-                 state=absent
-
 - name: openstack rabbit user
   rabbitmq_user: user={{ rabbitmq.user }}
                  password={{ secrets.rabbit_password }}
-                 {% if rabbitmq.cluster -%}
+                 {% if "{{ rabbitmq.cluster }}" -%}
                  node={{ rabbitmq.nodename }}
                  {% endif -%}
                  vhost=/
@@ -27,3 +20,11 @@
                  read_priv=.*
                  write_priv=.*
                  state=present
+
+- name: remove default rabbit user
+  rabbitmq_user: user=guest
+                 {% if "{{ rabbitmq.cluster }}" -%}
+                 node={{ rabbitmq.nodename }}
+                 {% endif -%}
+                 state=absent
+#
