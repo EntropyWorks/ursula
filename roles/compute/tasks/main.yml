@@ -5,12 +5,24 @@
 - name: enable nested kvm
   template: src=etc/modprobe.d/kvm-nested.conf dest=/etc/modprobe.d/kvm-nested.conf owner=root group=root mode=0644
 
-- action: apt pkg={{ item }}
+- name: additional packages for KVM support
+  action: apt pkg={{ item }}
   with_items:
     - libvirt-bin
     - python-libvirt
     - qemu-kvm
     - open-iscsi
+  when: "'{{ nova.libvirt_type }}' == 'kvm'"
+
+- name: additional packages for LXC support
+  action: apt pkg={{ item }}
+  with_items:
+    - libvirt-bin
+    - python-libvirt
+    - linux-container 
+    - lxc 
+    - lxctl
+  when: "'{{ nova.libvirt_type }}' == 'lxc'"
 
 - lineinfile: dest=/etc/libvirt/libvirtd.conf regexp="^listen_tcp\s*=" line="listen_tcp = 1"
   notify: restart libvirt-bin
