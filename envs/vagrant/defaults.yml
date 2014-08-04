@@ -75,7 +75,7 @@ openstack:
   git_update: yes
 
 nova:
-  libvirt_type: kvm
+  libvirt_type: qemu
 
 cinder:
   volume_file: /opt/stack/cinder-volumes
